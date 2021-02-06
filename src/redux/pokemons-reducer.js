@@ -4,11 +4,13 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const SET_POKEMONS = 'SET_POKEMONS'
 const SET_NEW_POKEMONS = 'SET_NEW_POKEMONS'
 const IS_NEW_POKEMONS_LOADING = 'IS_NEW_POKEMONS_LOADING'
+const SET_CURRENT_POKEMON = 'SET_CURRENT_POKEMON'
 let initialState = {
     isFetching: true,
     isNewPokemonsLoading: false,
     pokemons: [],
-    nextPokemonsPage: ''
+    nextPokemonsPage: '',
+    currentPokemon: 4
 
 }
 const pokemonsReducer = (state = initialState, action) => {
@@ -38,7 +40,13 @@ const pokemonsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isNewPokemonsLoading: action.isNewPokemonsLoading,
-                next:action.nextPage
+                next: action.nextPage
+            }
+        }
+        case SET_CURRENT_POKEMON: {
+            return {
+                ...state,
+               currentPokemon: Number(action.currentPokemon)
             }
         }
 
@@ -49,6 +57,7 @@ const pokemonsReducer = (state = initialState, action) => {
 
 export const setPokemons = (pokemons, nextPage) => ({type: SET_POKEMONS, pokemons, nextPage})
 export const setNewPokemons = (newPokemons, nextPage) => ({type: SET_NEW_POKEMONS, newPokemons, nextPage})
+export const setCurrentPokemon = (currentPokemon) => ({type: SET_CURRENT_POKEMON, currentPokemon})
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
 export const isNewPokemonsLoading = (isNewPokemonsLoading) => ({type: IS_NEW_POKEMONS_LOADING, isNewPokemonsLoading})
 
@@ -70,7 +79,6 @@ export const getPokemonsInfo = (data) => async (dispatch) => {
 }
 export const loadMore = (url) => async (dispatch) => {
     dispatch(isNewPokemonsLoading(true))
-debugger
     let data = await pokemonsAPI.getNewData(url)
     let pokeInfo = await dispatch(getPokemonsInfo(data.results))
     dispatch(setNewPokemons(pokeInfo, data.next))

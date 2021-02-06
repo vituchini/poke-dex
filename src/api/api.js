@@ -19,7 +19,6 @@ export const pokemonsAPI = {
             })
     },
     getNewData(url) {
-        debugger
         return axios.get(url)
             .then(res => {
                 return res.data

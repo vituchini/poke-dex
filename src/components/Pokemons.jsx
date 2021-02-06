@@ -6,7 +6,7 @@ function Pokemons(props) {
     return (
         <div>
             {props.pokemons.map(p => {
-                    return <Pokemon key={p.id} pokemon={p}/>
+                    return <Pokemon key={p.id} pokemon={p} setCurrentPokemon={props.setCurrentPokemon}/>
                 }
             )}
             {props.isNewPokemonsLoading
