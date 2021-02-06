@@ -1,3 +1,6 @@
+body{
+  background: url("./poke-bg.png");
+}
 .App {
   text-align: center;
 }

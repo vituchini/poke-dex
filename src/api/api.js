@@ -17,6 +17,13 @@ export const pokemonsAPI = {
             .then(res => {
                 return res.data
             })
+    },
+    getNewData(url) {
+        debugger
+        return axios.get(url)
+            .then(res => {
+                return res.data
+            })
     }
 
 }

@@ -1,3 +1,10 @@
-.pokemon{
-  background: lime
+.pokemonCard{
+  width: 100px;
+  height: 170px;
+  border: 1px solid deeppink;
+background: rgba(147, 78, 92, 0.4);
   }
+.pokemonCard img{
+  width: 100px;
+  height: 100px;
+}

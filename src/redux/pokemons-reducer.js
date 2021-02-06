@@ -2,11 +2,13 @@ import {pokemonsAPI} from "../api/api";
 
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const SET_POKEMONS = 'SET_POKEMONS'
-const SET_POKEMONS_INFO = 'SET_POKEMONS_INFO'
+const SET_NEW_POKEMONS = 'SET_NEW_POKEMONS'
+const IS_NEW_POKEMONS_LOADING = 'IS_NEW_POKEMONS_LOADING'
 let initialState = {
     isFetching: true,
+    isNewPokemonsLoading: false,
     pokemons: [],
-    pokemonsInfo: []
+    nextPokemonsPage: ''
 
 }
 const pokemonsReducer = (state = initialState, action) => {
@@ -14,24 +16,29 @@ const pokemonsReducer = (state = initialState, action) => {
         case SET_POKEMONS: {
             return {
                 ...state,
-                pokemons: [...action.pokemons]
+                pokemons: [...action.pokemons],
+                nextPokemonsPage: action.nextPage
             }
         }
-        case SET_POKEMONS_INFO: {
+        case SET_NEW_POKEMONS: {
             return {
                 ...state,
-                pokemonsInfo: [...action.pokemonsInfo],
-                pokemons:action.pokemonsInfo.filter(p=>{
-                    return state.pokemons.some(el=>{
-                        return el.name = p.name
-                    })
-                })
+                pokemons: state.pokemons.concat(action.newPokemons),
+                nextPokemonsPage: action.nextPage
             }
         }
+
         case TOGGLE_IS_FETCHING: {
             return {
                 ...state,
                 isFetching: action.isFetching
+            }
+        }
+        case IS_NEW_POKEMONS_LOADING: {
+            return {
+                ...state,
+                isNewPokemonsLoading: action.isNewPokemonsLoading,
+                next:action.nextPage
             }
         }
 
@@ -40,31 +47,35 @@ const pokemonsReducer = (state = initialState, action) => {
     }
 }
 
-export const setPokemons = (pokemons) => ({type: SET_POKEMONS, pokemons})
-export const setPokemonsInfo = (pokemonsInfo) => ({type: SET_POKEMONS_INFO, pokemonsInfo})
+export const setPokemons = (pokemons, nextPage) => ({type: SET_POKEMONS, pokemons, nextPage})
+export const setNewPokemons = (newPokemons, nextPage) => ({type: SET_NEW_POKEMONS, newPokemons, nextPage})
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
+export const isNewPokemonsLoading = (isNewPokemonsLoading) => ({type: IS_NEW_POKEMONS_LOADING, isNewPokemonsLoading})
 
 export const getPokemons = (count) => async (dispatch) => {
     dispatch(toggleIsFetching(true))
 
     let data = await pokemonsAPI.getPokemons(count)
-    dispatch(setPokemons(data.results))
-    await dispatch(getPokemonsInfo(data.results))
+    let pokeInfo = await dispatch(getPokemonsInfo(data.results))
+    dispatch(setPokemons(pokeInfo, data.next))
 
     dispatch(toggleIsFetching(false))
 
 }
 export const getPokemonsInfo = (data) => async (dispatch) => {
-    let pokeInfo = await Promise.all(data.map((p) => {
+    return await Promise.all(data.map((p) => {
         return pokemonsAPI.getPokemonData(p.name)
     }))
-    dispatch(setPokemonsInfo(pokeInfo))
+
 }
-export const LoadMore = () => async (dispatch) => {
-    dispatch(toggleIsFetching(true))
-    let data = await pokemonsAPI.getPokemonData()
-    dispatch(setPokemonsInfo(data.results))
-    dispatch(toggleIsFetching(false))
+export const loadMore = (url) => async (dispatch) => {
+    dispatch(isNewPokemonsLoading(true))
+debugger
+    let data = await pokemonsAPI.getNewData(url)
+    let pokeInfo = await dispatch(getPokemonsInfo(data.results))
+    dispatch(setNewPokemons(pokeInfo, data.next))
+
+    dispatch(isNewPokemonsLoading(false))
 
 }
 
