@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {connect} from "react-redux";
 import {getPokemons} from "../redux/pokemons-reducer";
 import Pokemons from "./Pokemons";
@@ -8,7 +8,7 @@ function PokemonsContainer(props) {
 
     useEffect(() => {
         props.getPokemons(12)
-    },[]);
+    }, []);
 
     return (
         <div>
@@ -30,6 +30,7 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps,
     {
         getPokemons,
+
     }
 )
 (PokemonsContainer)

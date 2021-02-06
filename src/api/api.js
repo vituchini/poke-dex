@@ -6,11 +6,17 @@ const instance = axios.create({
 );
 
 export const pokemonsAPI = {
-    getPokemons(count) {
+    getPokemons(count = 12) {
         return instance.get(`pokemon/?limit=${count}`)
             .then(res => {
                 return res.data
             })
     },
+    getPokemonData(name = 'bulbasaur') {
+        return instance.get(`pokemon/${name}`)
+            .then(res => {
+                return res.data
+            })
+    }
 
 }

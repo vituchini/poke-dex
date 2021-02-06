@@ -1,11 +1,19 @@
 import React from 'react';
+import {objectToJsx} from "../utils/object-helpers";
+import s from './Pokemons.module.css'
 function Pokemon({pokemon}) {
+    debugger
     let p = pokemon
     return (
-
-        <div>
+        <div className={s.pokemon}>
+            <hr/>
             {p.name}
-            <a href={p.url}>Show more</a>
+            <div className={s.types}>
+                {p.types.map(pok=>{
+                    return <div className={pok.type.name.name}>{pok.type.name}</div>
+                })}
+            </div>
+            {/*{objectToJsx(p.types)}*/}
         </div>
     );
 }
