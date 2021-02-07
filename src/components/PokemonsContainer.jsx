@@ -11,16 +11,24 @@ function PokemonsContainer(props) {
     useEffect(() => {
         props.getPokemons(12)
     }, []);
+
     return (
         <div>
             {props.isPokemonsLoading
                 ? <Preloader/>
                 : <div className={s.pokemonsBlock}>
-                    <Pokemons {...props}/>
-                    <PokemonInfo pokemon={props.pokemons.find(p => {
-                        return p.id === props.currentPokemon
 
-                    })}/>
+                    <div className={s.pokemonsListBlock}>
+                        <Pokemons {...props}/>
+                    </div>
+
+                    <div className={s.pokemonInfoBlock}>
+                        <PokemonInfo pokemon={props.pokemons.find(p => {
+                            return p.id === props.currentPokemon
+                        })}/>
+
+                    </div>
+
                 </div>
 
             }

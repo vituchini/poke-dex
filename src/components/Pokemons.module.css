@@ -13,16 +13,56 @@
 .pokemonsBlock {
     display: flex;
     flex-direction: row;
+    width: 100%;
+
+}
+.pokemonsListBlock{
+    flex-grow: 1;
+    background: #61dafb;
+}
+.pokemonInfoBlock{
+    flex-grow: 1;
+    background: #904a31;
 }
 
 .pokemonInfoCard {
-    right: 0;
+    right: 10px;
     font-size: 20px;
     position: fixed;
-    width: 200px;
-    height: 260px;
+    width: 400px;
+    height: 600px;
+    background: coral;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
 }
-.pokemonInfoCard img{
+
+.pokemonInfoCard table {
+    width: 90%;
+    background: white;
+    border-spacing: 0px;
+    margin: 5px;
+    border-top: 1px solid black;
+}
+
+td, th {
+    padding: 5px; /* Поля вокруг текста */
+    border: 1px solid black;
+    border-left: none;
+    border-top: none;
+}
+
+td:first-child {
+    border-left: 1px solid black;
+
+}
+
+th:first-child {
+    border-top: 1px solid black;
+}
+
+.pokemonInfoCard img {
     width: 200px;
     height: 200px;
 }

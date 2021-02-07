@@ -1,11 +1,11 @@
 import React from 'react';
 import s from './Pokemons.module.css'
+import {UcFirst} from "../utils/object-helpers";
 function Pokemon({pokemon,setCurrentPokemon}) {
     let p = pokemon
     return (
         <div className={s.pokemonCard} onClick={()=>setCurrentPokemon(p.id)}>
-            ♥{p.id}♥
-            {p.name}
+            {UcFirst(p.name)}
             <img src={`https://pokeres.bastionbot.org/images/pokemon/${p.id}.png`} alt="pokemon img"/>
             <div className={s.types}>
                 {p.types.map(pok=>{

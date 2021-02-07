@@ -10,7 +10,7 @@ let initialState = {
     isNewPokemonsLoading: false,
     pokemons: [],
     nextPokemonsPage: '',
-    currentPokemon: 4
+    currentPokemon: 1
 
 }
 const pokemonsReducer = (state = initialState, action) => {
