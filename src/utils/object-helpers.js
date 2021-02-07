@@ -31,7 +31,7 @@ export const isEmptyObject = (obj) => {
     }
     return true;
 }
-export const generateZeroedNumber = (number, countOfDigits) => {
+export const toZeroedNumber = (number, countOfDigits) => {
     let num = number.toString()
     if (num.length === countOfDigits) {
         return num

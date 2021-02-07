@@ -13,15 +13,14 @@ function PokemonsContainer(props) {
     }, []);
 
     return (
-        <div>
+        <div className={s.PokemonsContainerWrapper}>
+            <div className={s.PokemonsContainer}>
             {props.isPokemonsLoading
                 ? <Preloader/>
                 : <div className={s.pokemonsBlock}>
-
                     <div className={s.pokemonsListBlock}>
                         <Pokemons {...props}/>
                     </div>
-
                     <div className={s.pokemonInfoBlock}>
                         <PokemonInfo pokemon={props.pokemons.find(p => {
                             return p.id === props.currentPokemon
@@ -32,6 +31,7 @@ function PokemonsContainer(props) {
                 </div>
 
             }
+            </div>
         </div>
     )
 }

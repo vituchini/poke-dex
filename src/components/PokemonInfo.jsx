@@ -1,24 +1,27 @@
 import React from 'react';
 import s from './Pokemons.module.css'
-import {generateZeroedNumber, UcFirst} from "../utils/object-helpers";
+import {toZeroedNumber, UcFirst} from "../utils/object-helpers";
 
 function PokemonInfo({pokemon}) {
     let p = pokemon
     let stats = new Map()
-    p.stats.forEach(s => {
+    p?.stats.forEach(s => {
         stats.set(s.stat.name, s.base_stat)
     })
     return (
         <div className={s.pokemonInfoCard}>
             <img src={`https://pokeres.bastionbot.org/images/pokemon/${p.id}.png`} alt={p.name}/>
-            {UcFirst(p.name) + ' #' + generateZeroedNumber(p.id, 3)}
+            <div className={s.pokemonNameInfo}>
+                {UcFirst(p.name) + ' #' + toZeroedNumber(p.id, 3)}
+            </div>
 
             <table>
+                <tbody>
                 <tr>
                     <td>Type</td>
                     <td>
                         {p.types.map(pok => {
-                            return <div key={pok.type.name} className={pok.type.name}>{pok.type.name}</div>
+                            return <div key={pok.type.name} className={pok.type.name}>{UcFirst(pok.type.name)}</div>
                         })}
                     </td>
                 </tr>
@@ -54,6 +57,7 @@ function PokemonInfo({pokemon}) {
                     <td>Total moves</td>
                     <td>{p.moves.length}</td>
                 </tr>
+                </tbody>
             </table>
 
         </div>
