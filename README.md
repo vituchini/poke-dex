@@ -1,3 +1,4 @@
+# You can see the site at the link https://vituchini.github.io/poke-dex/ (Github Pages)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
