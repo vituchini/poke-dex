@@ -12,12 +12,6 @@ export const pokemonsAPI = {
                 return res.data
             })
     },
-    getPokemonData(name = 'bulbasaur') {
-        return instance.get(`pokemon/${name}`)
-            .then(res => {
-                return res.data
-            })
-    },
     getNewData(url) {
         return axios.get(url)
             .then(res => {

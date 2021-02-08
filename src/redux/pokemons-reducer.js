@@ -92,13 +92,10 @@ export const getPokemons = (count) => async (dispatch) => {
     dispatch(toggleIsFetching(false))
 
 }
-export const getAllTypes = () => async (dispatch) => {
-    return await pokemonsAPI.getTypes().results
-}
 
 export const getPokemonsInfo = (data) => async (dispatch) => {
     return await Promise.all(data.map((p) => {
-        return pokemonsAPI.getPokemonData(p.name)
+        return  pokemonsAPI.getNewData(p.url)
     }))
 
 }

@@ -133,6 +133,7 @@
     align-items: center;
     cursor: pointer;
     z-index: -2;
+    height: 200px;
 }
 
 .pokemonCard img {
