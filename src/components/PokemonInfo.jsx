@@ -9,7 +9,7 @@ function PokemonInfo({pokemon}) {
         stats.set(s.stat.name, s.base_stat)
     })
     return (
-        <div className={s.pokemonInfoCard}>
+        <div className={s.pokemonInfoCard} >
             <img src={`https://pokeres.bastionbot.org/images/pokemon/${p.id}.png`} alt={p.name}/>
             <div className={s.pokemonNameInfo}>
                 {UcFirst(p.name) + ' #' + toZeroedNumber(p.id, 3)}

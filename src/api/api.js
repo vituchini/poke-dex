@@ -23,6 +23,12 @@ export const pokemonsAPI = {
             .then(res => {
                 return res.data
             })
-    }
+    },
+    getTypes() {
+        return instance.get(`type`)
+            .then(res => {
+                return res.data
+            })
+    },
 
 }
